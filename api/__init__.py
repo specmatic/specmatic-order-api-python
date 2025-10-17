@@ -6,10 +6,13 @@ from flask import Flask, jsonify
 from marshmallow import ValidationError
 from werkzeug.exceptions import HTTPException
 
+from api.db import Database
+
 app = Flask(__name__)
 basedir = pathlib.Path(__file__).parent
 app.config["UPLOAD_FOLDER"] = basedir / "static" / "uploads"
 app.url_map.strict_slashes = False
+database = Database(app.config["UPLOAD_FOLDER"])
 
 
 @app.errorhandler(ValidationError)
