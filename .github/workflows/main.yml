@@ -33,8 +33,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run contract as tests with Specmatic Python Extensions
-      # run: coverage run --branch -m pytest test -v -s --junitxml contract-test-reports/TEST-junit-jupiter.xml
-        run: coverage run --branch -m pytest test/test_contract_with_coverage.py -v -s --junitxml contract-test-reports/TEST-junit-jupiter.xml
+        run: coverage run --branch -m pytest test -v -s --junitxml contract-test-reports/TEST-junit-jupiter.xml
 
       - name: Save Specmatic license
         if: false
