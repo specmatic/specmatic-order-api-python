@@ -20,7 +20,7 @@ def stream_container_logs(container: DockerContainer, name=None):
         for line in container.get_wrapped_container().logs(stream=True, follow=True):
             text = line.decode(errors="ignore").rstrip()
             prefix = f"[{name}] " if name else ""
-            print(f"{prefix}{text}")
+            print(f"{prefix}{text}", flush=True)
 
     thread = threading.Thread(target=_stream, daemon=True)
     thread.start()
@@ -52,9 +52,10 @@ def test_container():
         .waiting_for(LogMessageWaitStrategy("Tests run:"))
     )
     container.start()
-    stream_container_logs(container, name="specmatic-test")
+    thread = stream_container_logs(container, name="specmatic-test")
     yield container
     container.stop()
+    thread.join()
 
 
 @pytest.mark.skipif(
