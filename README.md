@@ -1,8 +1,7 @@
-
 # Specmatic Sample: Python-Flask Order API
 
 * [Specmatic Website](https://specmatic.io)
-* [Specmatic Documentation](https://specmatic.io/documentation.html)
+* [Specmatic Documentation](https://docs.specmatic.io)
 
 This sample project illustrates the implementation of contract-driven development and contract testing within a Flask (Python) application. In this context, Specmatic is utilized to function as a client, making calls to API service according to its OpenAPI specification to validate  its functionality.
 
@@ -14,11 +13,13 @@ Here is the API's [contract/open api spec](https://github.com/specmatic/specmati
 2. Specmatic
 3. PyTest
 4. Coverage
+5. Docker Desktop
 
 ## Setup
 
 1. Install [Python 3.12](https://www.python.org/)
 2. Install JRE 17 or later.
+3. Install Docker Desktop
 
 ## Setup Virtual Environment
 
