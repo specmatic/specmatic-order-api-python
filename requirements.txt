@@ -1,4 +1,4 @@
-coverage==7.13.0
+coverage==7.13.1
 Flask==3.1.2
 marshmallow==4.1.1
 pytest==8.4.2
