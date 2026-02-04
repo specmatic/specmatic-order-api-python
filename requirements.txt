@@ -2,5 +2,5 @@ coverage==7.13.3
 Flask==3.1.2
 marshmallow==4.1.2
 pytest==8.4.2
-specmatic==2.38.0
+specmatic==2.38.1
 testcontainers==4.14.1
