@@ -47,12 +47,12 @@ def delete_product(id: str):  # noqa: A002F
 
 @products.route("<id>/image", methods=["PUT"])
 def update_product_image(id: str):  # noqa: A002
+    new_image = Product.validate_image(request.files.get("image"))
     params: Id = Id.load(id)
     try:
         product = database.get_product_by_id_or_404(params.id)
     except HTTPException:
         # TODO: Add example id in openAPI Specification on order_api_v3.yaml
         return jsonify(message="Product image updated successfully", productId=params.id)
-    new_image = Product.validate_image(request.files.get("image"))
     database.update_product_image(product, new_image)
     return jsonify(message="Product image updated successfully", productId=params.id)
