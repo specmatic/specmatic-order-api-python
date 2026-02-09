@@ -31,4 +31,4 @@ components:
     orderApiService:
       openapi:
         type: test
-        baseUrl: "${APP_URL:http://127.0.0.1:5001}"
+        baseUrl: "{APP_URL:http://127.0.0.1:5001}"
