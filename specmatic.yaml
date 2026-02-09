@@ -1,27 +1,33 @@
-version: 2
-contracts:
-  - git:
-      url: https://github.com/specmatic/specmatic-order-contracts.git
-    provides:
-      - io/specmatic/examples/store/openapi/api_order_v3.yaml
-report:
-  formatters:
-    - type: text
-      layout: table
-      lite: false
-      title: Specmatic Report
-      logo: assets/specmatic-logo.svg
-      logoAltText: Specmatic
-      heading: Contract Test Results
+version: 3
+systemUnderTest:
+  service:
+    $ref: "#/components/services/orderApiService"
+    runOptions:
+      $ref: "#/components/runOptions/orderApiService"
+specmatic:
+  governance:
+    report:
+      formats:
+        - html
       outputDirectory: ./build/reports/specmatic/html
-  types:
-    APICoverage:
-      OpenAPI:
-        successCriteria:
-          minThresholdPercentage: 70
-          maxMissedEndpointsInSpec: 4
-          enforce: true
-  successCriteria:
-    minThresholdPercentage: 70
-    maxMissedEndpointsInSpec: 4
-    enforce: true
+    successCriteria:
+      minCoveragePercentage: 70
+      maxMissedOperationsInSpec: 4
+      enforce: true
+components:
+  sources:
+    orderContractsRepo:
+      git:
+        url: https://github.com/specmatic/specmatic-order-contracts.git
+  services:
+    orderApiService:
+      definitions:
+        - definition:
+            source:
+              $ref: "#/components/sources/orderContractsRepo"
+            specs:
+              - io/specmatic/examples/store/openapi/api_order_v3.yaml
+  runOptions:
+    orderApiService:
+      openapi:
+        type: test
