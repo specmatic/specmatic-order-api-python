@@ -47,8 +47,8 @@ def delete_product(id: str):  # noqa: A002F
 
 @products.route("<id>/image", methods=["PUT"])
 def update_product_image(id: str):  # noqa: A002
-    params: Id = Id.load(id)
     new_image = Product.validate_image(request.files.get("image"))
+    params: Id = Id.load(id)
     try:
         product = database.get_product_by_id_or_404(params.id)
     except HTTPException:
