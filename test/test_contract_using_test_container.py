@@ -46,6 +46,7 @@ def test_container():
         DockerContainer("specmatic/specmatic")
         .with_command(["test", "--host=host.docker.internal", f"--port={APPLICATION_PORT}"])
         .with_env("SPECMATIC_GENERATIVE_TESTS", "true")
+        .with_env("APP_URL", f"http://host.docker.internal:{APPLICATION_PORT}")
         .with_volume_mapping(specmatic_yaml_path, "/usr/src/app/specmatic.yaml", mode="ro")
         .with_volume_mapping(build_reports_path, "/usr/src/app/build/reports/specmatic", mode="rw")
         .with_kwargs(extra_hosts={"host.docker.internal": "host-gateway"})
