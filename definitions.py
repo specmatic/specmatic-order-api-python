@@ -1,3 +1,4 @@
 import pathlib
 
-ROOT_DIR = str(pathlib.Path.cwd().absolute())
+PROJECT_ROOT_PATH = pathlib.Path(__file__).resolve().parent
+PROJECT_ROOT = str(PROJECT_ROOT_PATH)

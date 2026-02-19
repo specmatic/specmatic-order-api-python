@@ -6,14 +6,13 @@ systemUnderTest:
       $ref: "#/components/runOptions/orderApiService"
 specmatic:
   governance:
-    report:
-      formats:
-        - html
-      outputDirectory: ./build/reports/specmatic/html
     successCriteria:
       minCoveragePercentage: 70
       maxMissedOperationsInSpec: 4
       enforce: true
+  settings:
+    test:
+      schemaResiliencyTests: all
 components:
   sources:
     orderContractsRepo:
@@ -32,3 +31,4 @@ components:
       openapi:
         type: test
         baseUrl: "{APP_URL:http://127.0.0.1:5001}"
+        filter: "PATH!='/internal/metrics'"

@@ -9,10 +9,10 @@ from testcontainers.core.container import DockerContainer
 from testcontainers.core.wait_strategies import LogMessageWaitStrategy
 
 from api import app, database
+from definitions import PROJECT_ROOT_PATH
 
 APPLICATION_HOST = "0.0.0.0"
 APPLICATION_PORT = 5001
-HTTP_STUB_PORT = 8080
 
 
 def stream_container_logs(container: DockerContainer, name=None):
@@ -40,12 +40,11 @@ def api_service():
 
 @pytest.fixture(scope="module")
 def test_container():
-    specmatic_yaml_path = Path("specmatic.yaml").resolve()
-    build_reports_path = Path("build/reports/specmatic").resolve()
+    specmatic_yaml_path = str(PROJECT_ROOT_PATH / "specmatic.yaml")
+    build_reports_path = str(PROJECT_ROOT_PATH / "build/reports/specmatic")
     container = (
         DockerContainer("specmatic/specmatic")
-        .with_command(["test", "--host=host.docker.internal", f"--port={APPLICATION_PORT}"])
-        .with_env("SPECMATIC_GENERATIVE_TESTS", "true")
+        .with_command(["test"])
         .with_env("APP_URL", f"http://host.docker.internal:{APPLICATION_PORT}")
         .with_volume_mapping(specmatic_yaml_path, "/usr/src/app/specmatic.yaml", mode="ro")
         .with_volume_mapping(build_reports_path, "/usr/src/app/build/reports/specmatic", mode="rw")
