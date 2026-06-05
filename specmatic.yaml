@@ -18,6 +18,7 @@ components:
     orderContractsRepo:
       git:
         url: https://github.com/specmatic/specmatic-order-contracts.git
+        branch: missing-response-codes
   services:
     orderApiService:
       definitions:
