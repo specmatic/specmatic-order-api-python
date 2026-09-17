@@ -13,11 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: python-wrapper
+          - name: pytest
             os: ubuntu-latest
             python-version: '3.12'
             test-file: test/test_contract_with_coverage.py
-          - name: python-wrapper
+          - name: pytest
             os: windows-latest
             python-version: '3.12'
             test-file: test/test_contract_with_coverage.py
@@ -62,12 +62,12 @@ jobs:
       - name: Run contract tests
         run: coverage run --branch -m pytest ${{ matrix.test-file }} -v -s --junitxml contract-test-reports/TEST-${{ matrix.name }}-${{ matrix.os }}.xml
 
-      - name: Publish contract test report
-        uses: mikepenz/action-junit-report@v6
+      - name: Publish JUnit test results
+        uses: mikepenz/action-junit-report@v4
         if: always()
         with:
           report_paths: "**/contract-test-reports/TEST-*.xml"
-          check_name: Contract tests (${{ matrix.name }}, ${{ matrix.os }})
+          check_name: ${{ matrix.name }} results (${{ matrix.os }})
 
       - name: Generate coverage report
         run: coverage html -d coverage-report
